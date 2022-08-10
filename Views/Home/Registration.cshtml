@@ -1,0 +1,20 @@
+﻿@model Forum.Models.User
+
+<h2>Registration</h2>
+<form asp-action="register" asp-controller="home">
+    <p>
+        <label asp-for="Nickname">Nickname</label><br />
+        <input type="text" asp-for="Nickname" />
+    </p>
+    <p>
+        <label asp-for="Email">Email</label><br />
+        <input type="text" asp-for="Email" />
+    </p>
+    <p>
+        <label asp-for="Password">Password</label><br />
+        <input type="text" asp-for="Password" />
+    </p>
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+</form>
