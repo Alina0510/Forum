@@ -1,0 +1,28 @@
+﻿@model Forum.Models.UserInput
+
+<div class="m-3"><h2>Login</h2></div>
+@if (ViewBag.Error != null)
+{
+    <p>@ViewBag.Error</p>
+}
+<form asp-action="login" asp-controller="home">
+    <div class="m-3">
+        <p>
+            <label class="form-label" asp-for="Email">Email</label><br />
+            <input class="form-control" type="email" asp-for="Email" />
+            <span asp-validation-for="Email" />
+        </p>
+    </div>
+    <div class="m-3">
+        <p>
+            <label class="form-label" asp-for="Password">Password</label><br />
+            <input class="form-control" type="password" asp-for="Password" />
+            <span asp-validation-for="Password" />
+        </p>
+    </div>
+    <div class="m-3">
+        <p>
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        </p>
+    </div>
+</form>

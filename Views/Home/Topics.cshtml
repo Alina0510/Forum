@@ -1,0 +1,27 @@
+﻿@model List<Forum.Models.TopicDisplay>
+<div class="container">
+    <div class="m-2 row justify-content-end">
+        <div class="col-1">
+            <form asp-controller="Home" asp-action="Logout" method="post">
+                <button class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
+    <div class="m-2 row text-start">
+        <table class="table">
+            <tr><td>Topics</td></tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@item.Header,"Posts","Home",new{topicId = @item.Id})</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <p>New Topic</p>
+    <form asp-controller="Home" asp-action="NewTopic" method="post">
+            <label class="form-label">Write Subject</label>
+            <input class="form-control" type="text" name="header" />
+            <input class="btn btn-primary" type="submit" value="Send" />
+    </form>
+</div>

@@ -1,0 +1,57 @@
+﻿@model Forum.Models.TopicWithPosts
+<div class="container">
+    <div class="m-2 row justify-content-end">
+        <form asp-controller="Home" asp-action="Logout" method="post">
+            <button class="btn btn-primary">Logout</button>
+        </form>
+    </div>
+    <div class="m-2 row">
+        @Html.ActionLink("To Topics", "Topics", "Home")
+    </div>
+    <div class="m-2 row">
+        <p class="fs-1">New Topic</p>
+    </div>
+    <div class="m-2 row">
+        <form asp-controller="Home" asp-action="NewPost" method="post">
+            <label class="form-label">Write Body</label><br />
+            <input class="form-control" type="text" name="body" /><br />
+            <input type="hidden" name="topicId" value=@Model.Id />
+            <input class="btn btn-primary" type="submit" value="Send" />
+        </form>
+    </div>
+    <div class="m-2 row">
+        <p class="fs-1">Posts</p>
+        <table class="table">
+            @if (Model.Posts != null)
+            {
+                @foreach (var item in Model.Posts)
+                {
+                    <tr>
+                        <td>@item.Body</td>
+                    </tr>
+                }
+        
+            }
+        </table>
+    </div>
+    <div class="m-2 row">
+        <p class="fs-1">Edit Topic</p>
+    </div>
+    <div class="m-2 row">
+        <form asp-controller="Home" asp-action="EditPost" method="post">
+            <p>
+                <label for="postId">Choose Post To Edit</label>
+                <select name="postId">
+                    @foreach (var item in Model.Posts.Where(i => i.OwnerEmail == User.Claims.ToArray()[0].Value))
+                    {
+                        <option value=@item.Id>@(item.Body.Length <= 20 ? item.Body : item.Body.Substring(0,20))</option>
+                    }
+                </select>
+            </p>
+            <label class="form-label">Write New Body</label><br />
+            <input class="form-control" type="text" name="body" /><br />
+            <input type="hidden" name="topicId" value=@Model.Id />
+            <input class="btn btn-primary" type="submit" value="Send" />
+        </form>
+    </div>
+</div>
